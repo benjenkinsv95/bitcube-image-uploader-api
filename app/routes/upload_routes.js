@@ -23,4 +23,11 @@ router.post('/uploads', upload.single('image'), (req, res, next) => {
     
 })
 
+router.get('/uploads', (req, res, next) => {
+    Upload.find()
+        .then(uploads => uploads.map(upload => upload.toObject()))
+        .then(uploads => res.json({ uploads }))
+        .catch(console.error)
+})
+
 module.exports = router
